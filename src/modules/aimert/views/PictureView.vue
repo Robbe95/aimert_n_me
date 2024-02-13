@@ -8,7 +8,7 @@ import { modalTransition } from '@/transitions'
 
 const date = ref<Date>(new Date())
 
-const minDate = new Date('2024-02-10')
+const minDate = new Date('2024-02-14')
 const maxDate = new Date()
 const random = computed<number>(() => {
 	const seed = date.value.getDate() + date.value.getMonth() + date.value.getFullYear()
