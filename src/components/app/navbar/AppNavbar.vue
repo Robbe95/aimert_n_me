@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import AppAvatar from '@/components/app/avatar/AppAvatar.vue'
 import AppButton from '@/components/core/button/AppButton.vue'
 import AppIcon from '@/components/core/icon/AppIcon.vue'
 import AppMenu from '@/components/core/menu/AppMenu.vue'
 import type { TabWithRoutes } from '@/components/core/tabs/AppTabs.vue'
 import { useTypedRouter } from '@/composables/core/router/typedRouter.composable'
-import type { CurrentUser } from '@/models/auth/currentUser.model.ts'
 import type { MenuConfiguration } from '@/models/core/menu.model'
-import { useAuthStore } from '@/stores/auth.store.ts'
 
 const { t } = useI18n()
 const router = useTypedRouter()
-const authStore = useAuthStore()
 
 const tabs: TabWithRoutes[] = [
 	{
@@ -30,15 +25,12 @@ const menuConfiguration: MenuConfiguration = [
 		text: 'Logout',
 		type: 'item',
 		onSelect(): void {
-			authStore.logout()
 			router.replace({
 				name: 'login',
 			})
 		},
 	},
 ]
-
-const currentUser = computed<CurrentUser | null>(() => authStore.currentUser)
 
 function onTabClick(tab: TabWithRoutes): void {
 	router.push(tab.to)
@@ -95,9 +87,7 @@ function isRouteActive(tab: TabWithRoutes): boolean {
 			<AppMenu
 				is-custom-button
 				:menu-configuration="menuConfiguration"
-			>
-				<AppAvatar :user="currentUser" />
-			</AppMenu>
+			/>
 		</div>
 	</div>
 </template>

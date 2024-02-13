@@ -3,7 +3,6 @@ import type { CreateAxiosDefaults } from 'axios'
 import Axios from 'axios'
 
 import { routerPlugin } from '@/plugins/router/router.plugin.ts'
-import { useAuthStore } from '@/stores/auth.store.ts'
 
 import { oAuthClient } from './oAuth.lib'
 
@@ -31,9 +30,6 @@ axios.interceptors.response.use(
 		const status = error.response?.status ?? null
 
 		if (status === 401) {
-			const authStore = useAuthStore()
-			authStore.logout()
-
 			await routerPlugin.replace({
 				name: 'login',
 			})
