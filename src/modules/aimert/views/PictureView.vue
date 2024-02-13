@@ -46,7 +46,7 @@ const random = computed<number>(() => {
 			<img
 				:key="random"
 				alt="Random picture"
-				class="h-96 w-96 rounded-lg border-solid border-primary object-cover"
+				class="object-fit h-[500px] w-auto rounded-lg border-solid border-primary"
 				:src="`/images/aimert_${random}.jpg`"
 			/>
 		</Transition>
